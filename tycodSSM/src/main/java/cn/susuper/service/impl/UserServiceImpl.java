@@ -13,7 +13,7 @@ import java.util.List;
  * @author susuper
  * @date 2019/8/8 18:03
  */
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
 
 

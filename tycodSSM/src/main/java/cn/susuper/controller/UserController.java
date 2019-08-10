@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * @author susuper
  * @date 2019/8/8 20:47
@@ -24,11 +28,12 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login")
-    public String login(Model model){
+    public String login(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 //        String username =
-        User user = userService.login("username");
+        User user = userService.login(request.getParameter("username"));
+        System.out.println(user);
         if (user!=null){
-            if (user.getPassword().equals("password")){
+            if (user.getPassword().equals(request.getParameter("password"))){
                 //登录成功
                 return "/page/page";
             }else{

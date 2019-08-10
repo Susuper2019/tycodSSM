@@ -53,4 +53,5 @@ public class Test {
         UserService userService = (UserService) ac.getBean("userService");//均可
         System.out.println(userService.login("admin"));
     }
+
 }
