@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置sring文件-->
+    <!--配置注解扫描-->
+    <context:component-scan base-package="cn.susuper.service"/>
+
+    <!--加载数据库配置文件-->
+    <context:property-placeholder location="classpath:resource/jdbc.properties"/>
+
+    <!--数据库连接池-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置sqlsessionFactory对象-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据库连接池-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--扫描pojo包，使用别名配置（这里没有使用，需要写全程）-->
+        <!--<property name=""-->
+
+        <!--加载mybatis的配置文件-->
+        <property name="configLocation" value="classpath:mybatis/mybatis.xml"/>
+
+        <!--扫描mapper层配置文件-->
+        <property name="mapperLocations" value="classpath:cn/susuper/mapper/UserMapper.xml"/>
+    </bean>
+
+    <!-- 使用mybatis的接口代理开发模式(必须保证接口和对应的mybatis的xml名称相同，且在一个文件夹内) -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描mapper的配置文件-->
+        <property name="basePackage" value="cn.susuper.mapper"/>
+
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--<bean class="cn.susuper.service.impl.UserServiceImpl" id="userService">-->
+        <!--&lt;!&ndash;<property name="userMapper" value="cn.susuper.mapper.UserMapper"></property>&ndash;&gt;-->
+    <!--</bean>-->
+
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="cn.susuper.mapper"/>-->
+    <!--</bean>-->
+</beans>
