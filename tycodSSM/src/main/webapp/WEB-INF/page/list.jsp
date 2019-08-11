@@ -13,7 +13,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
 <html>
-<link rel="stylesheet" href="<%=basePath%>/lib/bootstrap.min.css"/>
+<link rel="stylesheet" href="<%=basePath%>/bootstrap.min.css"/>
 <link rel="stylesheet" href="<%=basePath%>/lib/font-awesome.min.css"/>
 <head>
     <title>客户列表页面</title>
