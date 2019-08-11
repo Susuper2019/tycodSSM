@@ -4,7 +4,6 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
-<%=basePath%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -15,7 +14,7 @@
     <title>首页</title>
 <html>
 <body>
-<h2 class="text-center">SSM框架整合（分页查询）案例</h2>
+<h2 class="text-center">分页查询</h2>
 <hr/>
 <form action="<%=basePath%>/user/login" method="post" class="form-inline text-center">
     <label>username:</label>

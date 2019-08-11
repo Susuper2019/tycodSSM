@@ -44,6 +44,7 @@ public class UserController {
             model.addAttribute("message","用户名失败，查不到此用户");
             return "/page/loginInfo";
         }
+//        return  user;
     }
 
     /**
