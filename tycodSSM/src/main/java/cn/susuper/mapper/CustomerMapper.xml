@@ -7,7 +7,7 @@
         <id column="id" property="id" jdbcType="INTEGER"></id>
         <result column="name" property="name" jdbcType="VARCHAR"></result>
         <result column="telephone" property="telephone" jdbcType="VARCHAR"/>
-        <result column="address" property="adderss" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -29,5 +29,21 @@
     </update>
 
     <!--还有一个分页查询-->
-
+    <select id="findByPage" parameterType="cn.susuper.pojo.Customer" resultMap="BaseResultMap">
+        <!--select * from tb_customer where 1=1-->
+        <!--<if test="name!=null">-->
+            <!--and name like  concat('%',#{name},'%')-->
+        <!--</if>-->
+        <!--<if test="telephone!=null">-->
+            <!--and telephone like concat('%',#{telephone},'%')-->
+        <!--</if>-->
+    <!--</select>-->
+    SELECT * FROM tb_customer WHERE 1=1
+        <if test="name != null">
+         AND name LIKE CONCAT('%', #{name}, '%')
+        </if>
+        <if test="telephone != null">
+            AND telephone LIKE CONCAT('%', #{telephone}, '%')
+        </if>
+    </select>
 </mapper>

@@ -1,14 +1,17 @@
 package cn.susuper.controller;
 
 import cn.susuper.pojo.Customer;
+import cn.susuper.pojo.PageBean;
 import cn.susuper.service.CustomerService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 /**
@@ -39,10 +42,11 @@ public class CustomerController {
      * @param model
      * @return
      */
-    @RequestMapping("toListPage")
+    @RequestMapping("/toListPage")
     public String toListPage(Model model){
+//        return "findByPage";
 //   ??      重定向
-        return "redirect:findByPage";
+        return "redirect:findByPage.do";
     }
 
     /**
@@ -108,4 +112,28 @@ public class CustomerController {
     }
 
 
+    /**
+     * 分页查询
+     * @param customer
+     * @param pageCode
+     * @param pageSize
+     * @param model
+     * @return
+     *
+     */
+    @RequestMapping("/findByPage")
+//    value表示参数名字  required表示是否为必需，defaultValue表示默认值
+    public String findByPage(Customer customer,
+                             @RequestParam(value = "pageCode",required = false,defaultValue = "1") int pageCode,
+                             @RequestParam(value = "pageSize",required = false,defaultValue = "2") int pageSize,
+                             Model model){
+        //这两个可以使用，但是一旦没有获取到参数，会报出参数异常，所以这里用了springmvc的获取方式
+//        int pageCode = Integer.parseInt(request.getParameter(""));
+//        int pageSize = Integer.parseInt(request.getParameter(""));
+        //回显数据
+        System.out.println("1");
+        PageBean pageBean = customerService.findByPage(customer,pageCode,pageSize);
+        model.addAttribute("page",pageBean);
+        return "page/list";
+    }
 }

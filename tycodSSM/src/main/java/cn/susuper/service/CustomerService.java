@@ -1,6 +1,7 @@
 package cn.susuper.service;
 
 import cn.susuper.pojo.Customer;
+import cn.susuper.pojo.PageBean;
 
 /**
  * @Author susuper
@@ -9,4 +10,5 @@ import cn.susuper.pojo.Customer;
  */
 public interface CustomerService extends BaseService<Customer> {
     //一个分页查询，其余方法在baseservice中已经写好
+    public PageBean findByPage(Customer customer, int pageCode, int pageSize);
 }
