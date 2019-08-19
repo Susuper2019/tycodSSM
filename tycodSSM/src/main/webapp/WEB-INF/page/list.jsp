@@ -29,7 +29,8 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li><a href="<%=basePath%>/customer/toSavePage.do"><strong>添加信息功能</strong></a></li>
-                    <li><a href="<%=basePath%>/customer/toListPage"><strong>分页查询功能</strong></a></li>
+                    <li><a href="<%=basePath%>/customer/toListPage.do"><strong>分页查询功能</strong></a></li>
+                    <li><a>Create by TyCoding</a></li>
                 </ul>
             </div>
         </div>
@@ -82,6 +83,7 @@
                     <td>${customer.address}</td>
                     <td>${customer.remark}</td>
                     <td>
+
                         <a href="#" onclick="return edit(${customer.id})" style="text-decoration: none;">
                             <span class="fa fa-edit fa-fw"></span>
                         </a>

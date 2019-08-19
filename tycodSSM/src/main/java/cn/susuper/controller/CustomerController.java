@@ -3,12 +3,19 @@ package cn.susuper.controller;
 import cn.susuper.pojo.Customer;
 import cn.susuper.pojo.PageBean;
 import cn.susuper.service.CustomerService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +53,7 @@ public class CustomerController {
     public String toListPage(Model model){
 //        return "findByPage";
 //   ??      重定向
-        return "redirect:findByPage.do";
+        return "redirect:findByPage";
     }
 
     /**
@@ -79,19 +86,32 @@ public class CustomerController {
         customerService.delete(id);
         model.addAttribute("message","删除客户信息成功");
         return "page/info";
+//        toListPage(model);
     }
 
     /**
      * 根据id查询客户信息
-     * @param request
+     * @param
      * @return
      */
     @RequestMapping("/findById")
-    public Customer findById(HttpServletRequest request){
-        Long id = Long.parseLong(request.getParameter("id"));
-        Customer customer_info = null;
-        customer_info = customerService.findById(id);
-        return customer_info;
+    @ResponseBody
+    public Customer findById(@RequestBody Customer customer, HttpServletResponse response) throws JsonProcessingException {
+        Customer customer_info = customerService.findById(customer.getId());
+        if (customer_info != null) {
+            response.setContentType("application/json;charset=utf-8");
+//            ObjectMapper mapper = new ObjectMapper();
+//            String json = mapper.writeValueAsString(customer_info);
+//            System.out.println(json);
+//
+//            ModelAndView modelAndView = new ModelAndView();
+//            modelAndView.addObject("data",customer_info);
+//            return modelAndView;
+//            return json;
+            return customer_info;
+        } else {
+            return null;
+        }
     }
 
     /**

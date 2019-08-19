@@ -1,31 +1,25 @@
-<%@ page isELIgnored="false" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: admin
+  Date: 2019/8/19
+  Time: 10:45
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 %>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%--  <link href="<%=basePath%>/bootstrap.min.css" rel="stylesheet" type="text/css"/>--%>
-    <%--<link rel="stylesheet" href="<%=basePath%>/lib/bootstrap.min.js"/>--%>
-    <link rel="stylesheet" href="<%=basePath%>/lib/bootstrap.min.js"/>
-    <title>首页</title>
-<html>
+    <title>Title</title>
+</head>
 <body>
-<h2 class="text-center">分页查询</h2>
-<hr/>
-<form action="<%=basePath%>/user/login" method="post" class="form-inline text-center">
-    <label>username:</label>
-    <input type="text" class="form-control" name="username"/>
-    <br/>
-    <br/>
-    <label>password:</label>
-    <input type="password" class="form-control" name="password"/>
-    <br/>
-    <br/>
-    <input type="submit" value="登录" class="btn btn-default"/>
+<h2 >登录页面</h2>
+<form method="post" action="<%=basePath%>/user/login">
+    账号：<input type="text" name="username"><br>
+    密码：<input type="password" name="password">
+    <input type="submit" value="登录">
 </form>
 </body>
 </html>

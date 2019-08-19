@@ -28,6 +28,10 @@
         telephone=#{telephone},address=#{address},remark=#{remark} where id=#{id}
     </update>
 
+    <delete id="delete" parameterType="Long">
+        delete from tb_customer where id=#{id}
+    </delete>
+
     <!--还有一个分页查询-->
     <select id="findByPage" parameterType="cn.susuper.pojo.Customer" resultMap="BaseResultMap">
         <!--select * from tb_customer where 1=1-->
